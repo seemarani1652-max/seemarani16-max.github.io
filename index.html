@@ -3,327 +3,799 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aditya & Ravi Bro — Class 10th Study Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Aditya & Ravi Bro — Class 10th Free Study Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0e0e0e;--surface:#161616;--border:#2a2a2a;--text:#f0f0f0;--muted:#666;--gold:#c9a84c;--gold-light:#e8c97a;--white:#fff;}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;}
-
-/* NAV */
-nav{position:sticky;top:0;z-index:999;background:rgba(14,14,14,0.98);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:60px;backdrop-filter:blur(10px);}
-.logo{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--gold);text-decoration:none;}
-.nav-links{display:flex;gap:1.5rem;list-style:none;}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;transition:color 0.2s;}
-.nav-links a:hover{color:var(--gold);}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
-.hamburger span{width:22px;height:2px;background:var(--muted);display:block;}
-
-/* HERO */
-.hero{padding:70px 5% 50px;border-bottom:1px solid var(--border);}
-.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);color:var(--gold);padding:0.3rem 0.9rem;border-radius:3px;font-size:0.72rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:1.5rem;}
-.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,5vw,3.5rem);line-height:1.15;color:var(--white);font-weight:400;margin-bottom:1rem;}
-.hero h1 span{color:var(--gold);}
-.hero p{color:var(--muted);font-size:0.95rem;max-width:500px;font-weight:300;margin-bottom:2rem;}
-.hero-stats{display:flex;gap:2.5rem;flex-wrap:wrap;padding-top:1.5rem;border-top:1px solid var(--border);}
-.stat-num{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--gold);}
-.stat-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
-
-/* SEARCH */
-.search-wrap{padding:1.5rem 5%;border-bottom:1px solid var(--border);background:var(--surface);}
-.search-inner{max-width:520px;display:flex;background:var(--bg);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:border-color 0.2s;}
-.search-inner:focus-within{border-color:var(--gold);}
-.search-inner input{flex:1;background:transparent;border:none;outline:none;padding:0.75rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;}
-.search-inner input::placeholder{color:var(--muted);}
-.search-inner button{background:var(--gold);border:none;padding:0.75rem 1.2rem;color:#000;font-weight:600;cursor:pointer;font-size:0.85rem;font-family:'DM Sans',sans-serif;}
-#searchResults{max-width:520px;margin-top:0.5rem;display:none;}
-.search-result-item{padding:0.6rem 1rem;background:var(--bg);border:1px solid var(--border);border-radius:3px;margin-bottom:0.3rem;font-size:0.85rem;color:var(--text);cursor:pointer;}
-.search-result-item:hover{border-color:var(--gold);color:var(--gold);}
-
-/* SECTION */
-section{padding:3rem 5%;border-bottom:1px solid var(--border);}
-.sec-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:2rem;}
-.sec-header h2{font-family:'DM Serif Display',serif;font-size:1.5rem;font-weight:400;color:var(--white);}
-.sec-header span{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
-
-/* SUBJECT CARDS */
-.subject-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
-.subject-card{background:var(--surface);padding:1.5rem;cursor:pointer;transition:background 0.2s;}
-.subject-card:hover{background:#1c1c1c;}
-.subject-card.open{background:#1a1a1a;}
-.subject-top{display:flex;align-items:center;justify-content:space-between;}
-.subject-icon-name{display:flex;align-items:center;gap:0.8rem;}
-.s-icon{width:38px;height:38px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.15);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1rem;}
-.s-name{font-size:0.95rem;font-weight:600;color:var(--white);}
-.s-desc{font-size:0.78rem;color:var(--muted);margin:0.4rem 0 0 46px;}
-.toggle{color:var(--muted);font-size:1.3rem;font-weight:300;transition:transform 0.3s;line-height:1;}
-.subject-card.open .toggle{transform:rotate(45deg);color:var(--gold);}
-
-/* CHAPTERS */
-.chapters{display:none;flex-direction:column;gap:0.35rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);}
-.subject-card.open .chapters{display:flex;}
-.ch-row{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.8rem;background:var(--bg);border:1px solid var(--border);border-radius:3px;transition:border-color 0.2s;}
-.ch-row:hover{border-color:rgba(201,168,76,0.4);}
-.ch-info{flex:1;}
-.ch-name{font-size:0.82rem;font-weight:500;color:var(--text);}
-.ch-topics{font-size:0.72rem;color:var(--muted);margin-top:0.1rem;}
-.ch-btns{display:flex;gap:0.4rem;flex-shrink:0;margin-left:0.5rem;}
-.cbtn{font-size:0.7rem;padding:0.22rem 0.6rem;border-radius:2px;text-decoration:none;font-weight:600;border:1px solid;transition:all 0.2s;white-space:nowrap;}
-.cbtn-gold{color:var(--gold);border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.05);}
-.cbtn-gold:hover{background:var(--gold);color:#000;}
-.cbtn-dim{color:var(--muted);border-color:var(--border);}
-.cbtn-dim:hover{border-color:var(--muted);color:var(--white);}
-.coming-soon{font-size:0.68rem;color:var(--muted);font-style:italic;padding:0.2rem 0.5rem;}
-
-/* RESOURCES */
-.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
-.res-card{background:var(--surface);padding:1.5rem;text-decoration:none;display:block;transition:background 0.2s;}
-.res-card:hover{background:#1c1c1c;}
-.res-icon{font-size:1.3rem;margin-bottom:0.7rem;}
-.res-card h3{font-size:0.88rem;font-weight:600;color:var(--white);margin-bottom:0.3rem;}
-.res-card p{font-size:0.78rem;color:var(--muted);}
-.res-status{margin-top:0.8rem;font-size:0.72rem;font-weight:600;}
-.res-status.live{color:var(--gold);}
-.res-status.soon{color:var(--muted);font-style:italic;}
-
-/* IQ */
-.iq-list{display:flex;flex-direction:column;gap:0.5rem;}
-.iq-item{display:flex;align-items:flex-start;gap:1rem;padding:0.9rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:3px;transition:border-color 0.2s;}
-.iq-item:hover{border-color:rgba(201,168,76,0.3);}
-.iq-num{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--gold);min-width:28px;}
-.iq-body{flex:1;}
-.iq-text{font-size:0.85rem;color:var(--text);line-height:1.5;}
-.iq-subject{font-size:0.7rem;color:var(--muted);margin-top:0.2rem;}
-.iq-tag{font-size:0.68rem;padding:0.12rem 0.45rem;border-radius:2px;font-weight:600;white-space:nowrap;}
-.tag-high{background:rgba(201,168,76,0.12);color:var(--gold);}
-.tag-med{background:rgba(255,255,255,0.04);color:var(--muted);}
-
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
-.about-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:1.5rem;}
-.about-card h3{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--gold);margin-bottom:1rem;}
-.about-item{display:flex;align-items:flex-start;gap:0.8rem;margin-bottom:0.8rem;}
-.about-item .ai{font-size:1rem;margin-top:0.1rem;}
-.about-item p{font-size:0.83rem;color:var(--text);}
-.about-item span{font-size:0.75rem;color:var(--muted);}
-
-/* CONTACT */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
-.contact-links{display:flex;flex-direction:column;gap:0.7rem;}
-.contact-link{display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--surface);border:1px solid var(--border);border-radius:3px;text-decoration:none;transition:border-color 0.2s;}
-.contact-link:hover{border-color:var(--gold);}
-.cl-icon{font-size:1.1rem;}
-.cl-text h4{font-size:0.85rem;font-weight:600;color:var(--white);}
-.cl-text p{font-size:0.75rem;color:var(--muted);}
-.contact-form{display:flex;flex-direction:column;gap:0.7rem;}
-.contact-form input,.contact-form textarea{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:0.7rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;transition:border-color 0.2s;resize:none;}
-.contact-form input:focus,.contact-form textarea:focus{border-color:var(--gold);}
-.contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--muted);}
-.contact-form button{background:var(--gold);color:#000;border:none;padding:0.75rem;border-radius:3px;font-weight:600;font-size:0.85rem;cursor:pointer;font-family:'DM Sans',sans-serif;}
-.contact-form button:hover{background:var(--gold-light);}
-
-/* FOOTER */
-footer{padding:2.5rem 5%;border-top:1px solid var(--border);}
-.footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1.5rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
-.footer-logo{font-family:'DM Serif Display',serif;color:var(--gold);font-size:1.2rem;margin-bottom:0.3rem;}
-.footer-tagline{font-size:0.78rem;color:var(--muted);}
-.footer-links{display:flex;gap:1.5rem;}
-.footer-links a{color:var(--muted);text-decoration:none;font-size:0.78rem;transition:color 0.2s;}
-.footer-links a:hover{color:var(--gold);}
-.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.footer-bottom p{font-size:0.72rem;color:var(--muted);}
-
-/* MOBILE */
-@media(max-width:700px){
-  .nav-links{display:none;flex-direction:column;position:absolute;top:60px;left:0;width:100%;background:#111;border-bottom:1px solid var(--border);padding:1rem 5%;}
-  .nav-links.open{display:flex;}
-  .hamburger{display:flex;}
-  .about-grid,.contact-grid{grid-template-columns:1fr;}
-  .hero-stats{gap:1.5rem;}
+:root {
+  --bg: #0a0a0f;
+  --card: #111118;
+  --card2: #16161f;
+  --border: #1e1e2e;
+  --text: #e8e8f0;
+  --muted: #6b6b8a;
+  --primary: #6c63ff;
+  --primary-light: #8b85ff;
+  --primary-glow: rgba(108,99,255,0.15);
+  --green: #22c55e;
+  --orange: #f97316;
+  --pink: #ec4899;
+  --white: #ffffff;
 }
 
-/* FADE IN */
-.fade{opacity:0;transform:translateY(18px);transition:all 0.5s ease;}
-.fade.show{opacity:1;transform:translateY(0);}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%;
+  transition: all 0.3s;
+}
+.nav-logo {
+  font-size: 1.25rem; font-weight: 800;
+  background: linear-gradient(135deg, #6c63ff, #ec4899);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+.nav-links { display: flex; gap: 0.3rem; list-style: none; }
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  font-size: 0.85rem; font-weight: 500;
+  padding: 0.4rem 0.9rem; border-radius: 8px;
+  transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+.nav-cta {
+  background: var(--primary); color: white;
+  padding: 0.45rem 1.1rem; border-radius: 8px;
+  font-size: 0.85rem; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+  box-shadow: 0 0 20px rgba(108,99,255,0.3);
+}
+.nav-cta:hover { background: var(--primary-light); transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+.hamburger span { width: 22px; height: 2px; background: var(--muted); display: block; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 80px 5% 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated background */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 50%, rgba(108,99,255,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 30%, rgba(236,72,153,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 60% 80%, rgba(34,197,94,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Grid pattern */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(108,99,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108,99,255,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative; z-index: 1;
+  max-width: 680px;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(108,99,255,0.12);
+  border: 1px solid rgba(108,99,255,0.3);
+  color: var(--primary-light);
+  padding: 0.35rem 1rem; border-radius: 50px;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.3px; margin-bottom: 1.8rem;
+  animation: fadeDown 0.6s ease both;
+}
+
+.hero-badge .dot {
+  width: 6px; height: 6px;
+  background: var(--green); border-radius: 50%;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 900; line-height: 1.1;
+  color: var(--white);
+  letter-spacing: -1.5px;
+  margin-bottom: 1.2rem;
+  animation: fadeDown 0.7s 0.1s ease both;
+}
+
+.hero h1 .grad {
+  background: linear-gradient(135deg, #6c63ff 0%, #ec4899 50%, #f97316 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 1.05rem; color: var(--muted);
+  line-height: 1.7; max-width: 520px;
+  margin-bottom: 2.2rem; font-weight: 400;
+  animation: fadeDown 0.7s 0.2s ease both;
+}
+
+.hero-btns {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  animation: fadeDown 0.7s 0.3s ease both;
+  margin-bottom: 3rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6c63ff, #8b85ff);
+  color: white; padding: 0.75rem 1.8rem;
+  border-radius: 10px; font-weight: 700;
+  font-size: 0.95rem; text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 25px rgba(108,99,255,0.35);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 35px rgba(108,99,255,0.45); }
+
+.btn-secondary {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--text); padding: 0.75rem 1.8rem;
+  border-radius: 10px; font-weight: 600;
+  font-size: 0.95rem; text-decoration: none;
+  transition: all 0.3s;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); }
+
+/* HERO STATS */
+.hero-stats {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  animation: fadeDown 0.7s 0.4s ease both;
+}
+
+.hstat { }
+.hstat-num {
+  font-size: 1.7rem; font-weight: 800;
+  color: var(--white); line-height: 1;
+  letter-spacing: -0.5px;
+}
+.hstat-num span { color: var(--primary); }
+.hstat-label { font-size: 0.75rem; color: var(--muted); font-weight: 500; margin-top: 0.2rem; }
+
+/* FLOATING CARDS on right */
+.hero-visual {
+  position: absolute; right: 5%; top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 1rem;
+  animation: fadeLeft 0.8s 0.4s ease both;
+  z-index: 1;
+}
+
+.float-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem 1.3rem;
+  min-width: 220px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s;
+}
+.float-card:hover { transform: translateX(-5px); }
+.float-card-top { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.5rem; }
+.fc-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+.fc-title { font-size: 0.85rem; font-weight: 700; color: var(--white); }
+.fc-sub { font-size: 0.72rem; color: var(--muted); }
+.fc-bar { height: 4px; border-radius: 2px; background: var(--border); margin-top: 0.5rem; overflow: hidden; }
+.fc-fill { height: 100%; border-radius: 2px; }
+
+@keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeLeft { from{opacity:0;transform:translate(30px,-50%)} to{opacity:1;transform:translate(0,-50%)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* ===== MARQUEE ===== */
+.marquee-section {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  overflow: hidden;
+  background: rgba(108,99,255,0.03);
+}
+.marquee-track {
+  display: flex; gap: 2.5rem;
+  animation: marquee 25s linear infinite;
+  white-space: nowrap;
+}
+.marquee-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.82rem; color: var(--muted); font-weight: 500;
+}
+.marquee-item .mi-dot { color: var(--primary); font-size: 1.2rem; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ===== SECTIONS ===== */
+.section { padding: 5rem 5%; }
+.section-tag {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--primary-glow);
+  border: 1px solid rgba(108,99,255,0.2);
+  color: var(--primary-light);
+  padding: 0.25rem 0.8rem; border-radius: 50px;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 800; color: var(--white);
+  letter-spacing: -0.5px; line-height: 1.2;
+  margin-bottom: 0.7rem;
+}
+.section-sub { font-size: 0.95rem; color: var(--muted); max-width: 500px; line-height: 1.6; margin-bottom: 3rem; }
+
+/* ===== SUBJECT CARDS ===== */
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.2rem;
+}
+
+.subject-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.subject-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--card-color, var(--primary));
+  border-radius: 16px 16px 0 0;
+  opacity: 0; transition: opacity 0.3s;
+}
+
+.subject-card:hover { border-color: var(--card-color, var(--primary)); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.subject-card:hover::before { opacity: 1; }
+.subject-card.open { border-color: var(--card-color, var(--primary)); }
+.subject-card.open::before { opacity: 1; }
+
+.sc-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.8rem; }
+.sc-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; background: var(--card-bg, rgba(108,99,255,0.12));
+  flex-shrink: 0;
+}
+.sc-toggle {
+  width: 26px; height: 26px; border-radius: 8px;
+  background: var(--border); display: flex; align-items: center;
+  justify-content: center; color: var(--muted); font-size: 1rem;
+  transition: all 0.3s; flex-shrink: 0;
+}
+.subject-card.open .sc-toggle { background: var(--card-color, var(--primary)); color: white; transform: rotate(45deg); }
+
+.sc-name { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem; }
+.sc-desc { font-size: 0.78rem; color: var(--muted); }
+.sc-meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.8rem; }
+.sc-count {
+  background: var(--primary-glow); border: 1px solid rgba(108,99,255,0.2);
+  color: var(--primary-light); padding: 0.2rem 0.6rem;
+  border-radius: 50px; font-size: 0.7rem; font-weight: 600;
+}
+
+/* CHAPTERS */
+.chapters { display: none; flex-direction: column; gap: 0.4rem; padding-top: 1rem; border-top: 1px solid var(--border); margin-top: 0.8rem; }
+.subject-card.open .chapters { display: flex; }
+
+.ch-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.65rem 0.9rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border); border-radius: 10px;
+  transition: all 0.2s;
+}
+.ch-item:hover { background: rgba(108,99,255,0.06); border-color: rgba(108,99,255,0.2); }
+.ch-left { flex: 1; }
+.ch-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+.ch-topics { font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+.ch-right { display: flex; gap: 0.4rem; flex-shrink: 0; margin-left: 0.5rem; }
+.ch-btn {
+  font-size: 0.68rem; padding: 0.2rem 0.6rem;
+  border-radius: 6px; border: 1px solid;
+  font-weight: 600; text-decoration: none; transition: all 0.2s;
+  white-space: nowrap; cursor: pointer;
+}
+.ch-btn-p { color: var(--primary-light); border-color: rgba(108,99,255,0.3); background: rgba(108,99,255,0.08); }
+.ch-btn-p:hover { background: var(--primary); color: white; border-color: var(--primary); }
+.ch-btn-dim { color: var(--muted); border-color: var(--border); background: transparent; font-style: italic; }
+
+/* ===== FEATURES ===== */
+.features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.2rem; }
+.feature-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.5rem;
+  transition: all 0.3s;
+}
+.feature-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+.feat-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--primary-glow); border: 1px solid rgba(108,99,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; margin-bottom: 1rem;
+}
+.feat-title { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+.feat-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+/* ===== IQ ===== */
+.iq-grid { display: flex; flex-direction: column; gap: 0.7rem; }
+.iq-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1rem 1.2rem;
+  display: flex; align-items: flex-start; gap: 1rem;
+  transition: all 0.2s;
+}
+.iq-card:hover { border-color: rgba(108,99,255,0.3); background: var(--card2); }
+.iq-num {
+  font-size: 1.1rem; font-weight: 800;
+  color: var(--primary); min-width: 28px; font-variant-numeric: tabular-nums;
+}
+.iq-body { flex: 1; }
+.iq-q { font-size: 0.88rem; font-weight: 500; color: var(--text); line-height: 1.5; }
+.iq-meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; }
+.iq-subj { font-size: 0.7rem; color: var(--muted); }
+.iq-tag { font-size: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 50px; font-weight: 700; }
+.tag-h { background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.2); }
+.tag-m { background: rgba(34,197,94,0.1); color: #4ade80; border: 1px solid rgba(34,197,94,0.15); }
+
+/* ===== ABOUT ===== */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.about-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; }
+.about-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 1.2rem; }
+.about-item { display: flex; gap: 0.9rem; margin-bottom: 1rem; }
+.about-item .ai-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.about-item h4 { font-size: 0.85rem; font-weight: 600; color: var(--white); }
+.about-item p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+/* ===== CONTACT ===== */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 1rem;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.1rem 1.3rem;
+  text-decoration: none; transition: all 0.25s;
+}
+.contact-link:hover { border-color: var(--primary); transform: translateX(4px); }
+.cl-icon-wrap {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--primary-glow); border: 1px solid rgba(108,99,255,0.2);
+  display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+}
+.cl-title { font-size: 0.88rem; font-weight: 700; color: var(--white); }
+.cl-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+
+.contact-form { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem; display: flex; flex-direction: column; gap: 1rem; }
+.contact-form h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
+.form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-field label { font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.form-field input, .form-field textarea {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0.75rem 1rem;
+  color: var(--text); font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem; outline: none; transition: border-color 0.2s; resize: none;
+}
+.form-field input:focus, .form-field textarea:focus { border-color: var(--primary); }
+.form-field input::placeholder, .form-field textarea::placeholder { color: var(--muted); }
+.form-submit {
+  background: linear-gradient(135deg, #6c63ff, #8b85ff);
+  color: white; border: none; padding: 0.85rem;
+  border-radius: 10px; font-weight: 700; font-size: 0.9rem;
+  cursor: pointer; font-family: 'Outfit', sans-serif;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(108,99,255,0.3);
+}
+.form-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 25px rgba(108,99,255,0.4); }
+
+/* ===== SEARCH ===== */
+.search-section { padding: 1.5rem 5%; background: rgba(108,99,255,0.04); border-bottom: 1px solid var(--border); }
+.search-wrap { max-width: 580px; position: relative; }
+.search-wrap input {
+  width: 100%; background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 0.85rem 3.5rem 0.85rem 1.2rem;
+  color: var(--text); font-family: 'Outfit', sans-serif;
+  font-size: 0.92rem; outline: none; transition: all 0.2s;
+}
+.search-wrap input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(108,99,255,0.1); }
+.search-wrap input::placeholder { color: var(--muted); }
+.search-btn {
+  position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%);
+  background: var(--primary); border: none; border-radius: 8px;
+  padding: 0.45rem 0.9rem; color: white; font-size: 0.8rem;
+  font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif;
+}
+.search-results { margin-top: 0.5rem; display: none; }
+.sr-item {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.65rem 0.9rem; background: var(--card);
+  border: 1px solid var(--border); border-radius: 10px;
+  margin-bottom: 0.3rem; cursor: pointer; transition: all 0.2s;
+}
+.sr-item:hover { border-color: var(--primary); background: var(--card2); }
+.sr-icon { width: 28px; height: 28px; border-radius: 7px; background: var(--primary-glow); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0; }
+.sr-name { font-size: 0.83rem; font-weight: 600; color: var(--text); }
+.sr-sub { font-size: 0.7rem; color: var(--muted); }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--card); border-top: 1px solid var(--border);
+  padding: 3rem 5% 2rem;
+}
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+.footer-brand .f-logo {
+  font-size: 1.2rem; font-weight: 800;
+  background: linear-gradient(135deg, #6c63ff, #ec4899);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+.footer-brand p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; max-width: 250px; }
+.footer-col h4 { font-size: 0.8rem; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem; }
+.footer-col a { display: block; color: var(--muted); text-decoration: none; font-size: 0.82rem; margin-bottom: 0.5rem; transition: color 0.2s; }
+.footer-col a:hover { color: var(--primary-light); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.footer-bottom p { font-size: 0.75rem; color: var(--muted); }
+
+/* ===== SCROLL ANIMATION ===== */
+.reveal { opacity: 0; transform: translateY(24px); transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .nav-links { display: none; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: rgba(10,10,15,0.98); padding: 1.5rem 5%; border-bottom: 1px solid var(--border); }
+  .nav-links.open { display: flex; }
+  .hamburger { display: flex; }
+  .nav-cta { display: none; }
+  .hero-visual { display: none; }
+  .hero h1 { font-size: 2.2rem; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .subjects-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .hero-stats { gap: 1.5rem; }
+}
+@media (max-width: 480px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; }
+  .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="#" class="logo">Aditya & Ravi Bro</a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#subjects">Subjects</a></li>
-    <li><a href="#resources">Resources</a></li>
-    <li><a href="#questions">Questions</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Aditya & Ravi Bro ✦</div>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#subjects" onclick="closeNav()">Subjects</a></li>
+    <li><a href="#resources" onclick="closeNav()">Resources</a></li>
+    <li><a href="#questions" onclick="closeNav()">Questions</a></li>
+    <li><a href="#about" onclick="closeNav()">About</a></li>
+    <li><a href="#contact" onclick="closeNav()">Contact</a></li>
   </ul>
-  <button class="hamburger" onclick="toggleNav()">
-    <span></span><span></span><span></span>
-  </button>
+  <a href="https://wa.me/919721169466" class="nav-cta">💬 WhatsApp Us</a>
+  <button class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- HERO -->
-<div class="hero fade">
-  <div class="hero-tag">📚 CBSE Class 10th — Free Study Hub</div>
-  <h1>Aditya & <span>Ravi Bro</span><br>Study Platform</h1>
-  <p>Chapter-wise notes, NCERT solutions, important questions aur sample papers. Bilkul free — Azamgarh ke students ke liye!</p>
-  <div class="hero-stats">
-    <div><div class="stat-num">6</div><div class="stat-label">Subjects</div></div>
-    <div><div class="stat-num">89</div><div class="stat-label">Chapters Listed</div></div>
-    <div><div class="stat-num">8</div><div class="stat-label">Important Q&A</div></div>
-    <div><div class="stat-num">Free</div><div class="stat-label">Always</div></div>
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Class 10th CBSE — Free Study Hub</div>
+    <h1>Study Smarter,<br>Score <span class="grad">Higher! 🚀</span></h1>
+    <p>Chapter-wise notes, NCERT solutions, important questions aur sample papers — sabkuch free mein. Azamgarh ke students ke liye, Azamgarh ke students ne banaya!</p>
+    <div class="hero-btns">
+      <a href="#subjects" class="btn-primary">📚 Start Studying</a>
+      <a href="https://wa.me/919721169466" class="btn-secondary">💬 Ask a Doubt</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">6<span>+</span></div><div class="hstat-label">Subjects</div></div>
+      <div class="hstat"><div class="hstat-num">89<span>+</span></div><div class="hstat-label">Chapters</div></div>
+      <div class="hstat"><div class="hstat-num">100<span>%</span></div><div class="hstat-label">Free Always</div></div>
+      <div class="hstat"><div class="hstat-num">24<span>/7</span></div><div class="hstat-label">Available</div></div>
+    </div>
+  </div>
+
+  <!-- FLOATING CARDS -->
+  <div class="hero-visual">
+    <div class="float-card">
+      <div class="float-card-top">
+        <div class="fc-icon" style="background:rgba(108,99,255,0.15)">📐</div>
+        <div><div class="fc-title">Mathematics</div><div class="fc-sub">15 Chapters</div></div>
+      </div>
+      <div class="fc-bar"><div class="fc-fill" style="width:85%;background:linear-gradient(90deg,#6c63ff,#8b85ff)"></div></div>
+    </div>
+    <div class="float-card">
+      <div class="float-card-top">
+        <div class="fc-icon" style="background:rgba(34,197,94,0.15)">🔬</div>
+        <div><div class="fc-title">Science</div><div class="fc-sub">16 Chapters</div></div>
+      </div>
+      <div class="fc-bar"><div class="fc-fill" style="width:90%;background:linear-gradient(90deg,#22c55e,#4ade80)"></div></div>
+    </div>
+    <div class="float-card">
+      <div class="float-card-top">
+        <div class="fc-icon" style="background:rgba(249,115,22,0.15)">🌍</div>
+        <div><div class="fc-title">Social Science</div><div class="fc-sub">20 Chapters</div></div>
+      </div>
+      <div class="fc-bar"><div class="fc-fill" style="width:75%;background:linear-gradient(90deg,#f97316,#fb923c)"></div></div>
+    </div>
+    <div class="float-card">
+      <div class="float-card-top">
+        <div class="fc-icon" style="background:rgba(236,72,153,0.15)">📖</div>
+        <div><div class="fc-title">English</div><div class="fc-sub">12 Chapters</div></div>
+      </div>
+      <div class="fc-bar"><div class="fc-fill" style="width:80%;background:linear-gradient(90deg,#ec4899,#f472b6)"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="mi-dot">✦</span> Real Numbers</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Trigonometry</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Chemical Reactions</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Nationalism in India</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Electricity</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Nelson Mandela</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Polynomials</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Life Processes</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Surdas ke Pad</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Probability</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Light & Optics</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> NCERT Solutions</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Sample Papers</span>
+    <!-- repeat for seamless loop -->
+    <span class="marquee-item"><span class="mi-dot">✦</span> Real Numbers</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Trigonometry</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Chemical Reactions</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Nationalism in India</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Electricity</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Nelson Mandela</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Polynomials</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Life Processes</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Surdas ke Pad</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Probability</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Light & Optics</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> NCERT Solutions</span>
+    <span class="marquee-item"><span class="mi-dot">✦</span> Sample Papers</span>
   </div>
 </div>
 
 <!-- SEARCH -->
-<div class="search-wrap fade">
-  <div class="search-inner">
-    <input type="text" id="searchInput" placeholder="Search chapters, topics e.g. Trigonometry, Electricity..." oninput="doSearch()">
-    <button onclick="doSearch()">Search</button>
+<div class="search-section">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="🔍  Search chapters, topics, formulas..." oninput="doSearch()">
+    <button class="search-btn" onclick="doSearch()">Search</button>
+    <div class="search-results" id="searchResults"></div>
   </div>
-  <div id="searchResults"></div>
 </div>
 
-<!-- SUBJECTS -->
-<section id="subjects" class="fade">
-  <div class="sec-header">
-    <h2>Subjects</h2>
-    <span>Click subject to see all chapters</span>
+<!-- FEATURES -->
+<section class="section reveal">
+  <div class="section-tag">✦ Why Us</div>
+  <h2 class="section-title">Sab Kuch Ek Jagah</h2>
+  <p class="section-sub">Notes se lekar sample papers tak — har cheez organized, clear aur bilkul free!</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feat-icon">📝</div>
+      <div class="feat-title">Chapter Notes</div>
+      <div class="feat-desc">Har chapter ke easy-to-read notes jo board exam ke liye perfect hain.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">✅</div>
+      <div class="feat-title">NCERT Solutions</div>
+      <div class="feat-desc">Step-by-step solved exercises with explanations in simple language.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🔢</div>
+      <div class="feat-title">Formula Sheets</div>
+      <div class="feat-desc">Maths & Science ke saare important formulas ek jagah.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">📊</div>
+      <div class="feat-title">Sample Papers</div>
+      <div class="feat-desc">Previous year aur practice board papers with solutions.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">💬</div>
+      <div class="feat-title">Doubt Solving</div>
+      <div class="feat-desc">WhatsApp pe seedha poocho — same day reply guaranteed!</div>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🆓</div>
+      <div class="feat-title">Always Free</div>
+      <div class="feat-desc">Koi subscription nahi, koi fee nahi — poora content bilkul free.</div>
+    </div>
   </div>
-  <div class="subject-grid">
+</section>
+
+<!-- SUBJECTS -->
+<section class="section reveal" id="subjects" style="padding-top:2rem">
+  <div class="section-tag">📚 All Subjects</div>
+  <h2 class="section-title">Choose Your Subject</h2>
+  <p class="section-sub">Subject pe click karo aur chapters dekho — notes aur PDFs jaldi add ho rahe hain!</p>
+  <div class="subjects-grid">
 
     <!-- MATHS -->
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <div class="subject-top">
-        <div class="subject-icon-name"><div class="s-icon">📐</div><span class="s-name">Mathematics</span></div>
-        <span class="toggle">+</span>
+    <div class="subject-card" style="--card-color:#6c63ff;--card-bg:rgba(108,99,255,0.1)" onclick="toggleCard(this)">
+      <div class="sc-top">
+        <div style="display:flex;align-items:center;gap:0.8rem">
+          <div class="sc-icon">📐</div>
+          <div><div class="sc-name">Mathematics</div><div class="sc-desc">Algebra, Geometry, Trigonometry</div></div>
+        </div>
+        <div class="sc-toggle">+</div>
       </div>
-      <div class="s-desc">Real Numbers to Probability — 15 Chapters</div>
+      <div class="sc-meta"><span class="sc-count">15 Chapters</span></div>
       <div class="chapters">
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 1 — Real Numbers</div><div class="ch-topics">Euclid's Lemma, HCF, LCM, Irrational Numbers</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 2 — Polynomials</div><div class="ch-topics">Zeroes, Coefficients, Division Algorithm</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 3 — Linear Equations in Two Variables</div><div class="ch-topics">Graphical, Substitution, Elimination Methods</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 4 — Quadratic Equations</div><div class="ch-topics">Factorisation, Completing Square, Discriminant</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 5 — Arithmetic Progressions</div><div class="ch-topics">nth Term, Sum of n Terms</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 6 — Triangles</div><div class="ch-topics">Similarity, BPT, Pythagoras Theorem</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 7 — Coordinate Geometry</div><div class="ch-topics">Distance, Section Formula, Area of Triangle</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 8 — Introduction to Trigonometry</div><div class="ch-topics">Ratios, Identities, Complementary Angles</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 9 — Applications of Trigonometry</div><div class="ch-topics">Heights & Distances, Angle of Elevation</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 10 — Circles</div><div class="ch-topics">Tangents, Secants, Number of Tangents</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 11 — Areas Related to Circles</div><div class="ch-topics">Sector, Segment, Perimeter</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 12 — Surface Areas & Volumes</div><div class="ch-topics">Combination of Solids, Frustum</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 13 — Statistics</div><div class="ch-topics">Mean, Median, Mode — Grouped Data</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 14 — Probability</div><div class="ch-topics">Classical Probability, Real-life Problems</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 1 — Real Numbers</div><div class="ch-topics">Euclid's Lemma · HCF · LCM · Irrational Numbers</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 2 — Polynomials</div><div class="ch-topics">Zeroes · Coefficients · Division Algorithm</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 3 — Linear Equations</div><div class="ch-topics">Graphical · Substitution · Elimination · Cross Multiplication</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 4 — Quadratic Equations</div><div class="ch-topics">Factorisation · Completing Square · Discriminant</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 5 — Arithmetic Progressions</div><div class="ch-topics">nth Term · Sum of n Terms · Applications</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 6 — Triangles</div><div class="ch-topics">Similarity · BPT · Pythagoras Theorem</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 7 — Coordinate Geometry</div><div class="ch-topics">Distance Formula · Section Formula · Area</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 8 — Introduction to Trigonometry</div><div class="ch-topics">Ratios · Identities · Complementary Angles</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 9 — Applications of Trigonometry</div><div class="ch-topics">Heights & Distances · Angle of Elevation</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 10 — Circles</div><div class="ch-topics">Tangents · Secants · Theorems</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 11 — Areas Related to Circles</div><div class="ch-topics">Sector · Segment · Perimeter & Area</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 12 — Surface Areas & Volumes</div><div class="ch-topics">Combination of Solids · Frustum · Conversion</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 13 — Statistics</div><div class="ch-topics">Mean · Median · Mode — Grouped Data</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 14 — Probability</div><div class="ch-topics">Classical Probability · Real-life Problems</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
       </div>
     </div>
 
     <!-- SCIENCE -->
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <div class="subject-top">
-        <div class="subject-icon-name"><div class="s-icon">🔬</div><span class="s-name">Science</span></div>
-        <span class="toggle">+</span>
+    <div class="subject-card" style="--card-color:#22c55e;--card-bg:rgba(34,197,94,0.1)" onclick="toggleCard(this)">
+      <div class="sc-top">
+        <div style="display:flex;align-items:center;gap:0.8rem">
+          <div class="sc-icon">🔬</div>
+          <div><div class="sc-name">Science</div><div class="sc-desc">Physics, Chemistry & Biology</div></div>
+        </div>
+        <div class="sc-toggle">+</div>
       </div>
-      <div class="s-desc">Physics, Chemistry & Biology — 16 Chapters</div>
+      <div class="sc-meta"><span class="sc-count">16 Chapters</span></div>
       <div class="chapters">
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 1 — Chemical Reactions & Equations</div><div class="ch-topics">Balancing, Types of Reactions, Oxidation</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 2 — Acids, Bases & Salts</div><div class="ch-topics">pH Scale, Indicators, Common Salt Products</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 3 — Metals & Non-Metals</div><div class="ch-topics">Properties, Reactivity Series, Ionic Bonds</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 4 — Carbon & its Compounds</div><div class="ch-topics">Covalent Bonds, Homologous Series</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 6 — Life Processes</div><div class="ch-topics">Nutrition, Respiration, Transportation</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 7 — Control & Coordination</div><div class="ch-topics">Nervous System, Hormones, Reflex Action</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 8 — How do Organisms Reproduce?</div><div class="ch-topics">Asexual, Sexual Reproduction</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 9 — Heredity & Evolution</div><div class="ch-topics">Mendel's Laws, Natural Selection</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 10 — Light: Reflection & Refraction</div><div class="ch-topics">Mirror & Lens Formula, Refraction Laws</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 11 — Human Eye & Colourful World</div><div class="ch-topics">Defects of Vision, Scattering of Light</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 12 — Electricity</div><div class="ch-topics">Ohm's Law, Resistance, Series & Parallel</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 13 — Magnetic Effects of Current</div><div class="ch-topics">Electromagnet, Motor, Generator</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 14 — Sources of Energy</div><div class="ch-topics">Conventional & Non-Conventional Energy</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 15 — Our Environment</div><div class="ch-topics">Ecosystem, Food Chain, Ozone Depletion</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Ch 16 — Management of Natural Resources</div><div class="ch-topics">Conservation, Forests, Water Management</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 1 — Chemical Reactions & Equations</div><div class="ch-topics">Balancing · Types of Reactions · Oxidation-Reduction</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 2 — Acids, Bases & Salts</div><div class="ch-topics">pH Scale · Indicators · Common Salt Products</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 3 — Metals & Non-Metals</div><div class="ch-topics">Properties · Reactivity Series · Ionic Bonds</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 4 — Carbon & its Compounds</div><div class="ch-topics">Covalent Bonds · Homologous Series · Soaps</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 6 — Life Processes</div><div class="ch-topics">Nutrition · Respiration · Transportation · Excretion</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 7 — Control & Coordination</div><div class="ch-topics">Nervous System · Hormones · Reflex Action</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 8 — How do Organisms Reproduce?</div><div class="ch-topics">Asexual · Sexual Reproduction · Pollination</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 9 — Heredity & Evolution</div><div class="ch-topics">Mendel's Laws · Natural Selection</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 10 — Light: Reflection & Refraction</div><div class="ch-topics">Mirror & Lens Formula · Laws of Refraction</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 11 — Human Eye & Colourful World</div><div class="ch-topics">Defects of Vision · Atmospheric Refraction</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 12 — Electricity</div><div class="ch-topics">Ohm's Law · Resistance · Series & Parallel Circuits</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 13 — Magnetic Effects of Current</div><div class="ch-topics">Electromagnet · Motor · Generator · Domestic Wiring</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 14 — Sources of Energy</div><div class="ch-topics">Conventional · Solar · Wind · Nuclear Energy</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 15 — Our Environment</div><div class="ch-topics">Ecosystem · Food Chain · Ozone Depletion</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Ch 16 — Management of Natural Resources</div><div class="ch-topics">Conservation · Forests · Water Management</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
       </div>
     </div>
 
     <!-- SST -->
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <div class="subject-top">
-        <div class="subject-icon-name"><div class="s-icon">🌍</div><span class="s-name">Social Science</span></div>
-        <span class="toggle">+</span>
+    <div class="subject-card" style="--card-color:#f97316;--card-bg:rgba(249,115,22,0.1)" onclick="toggleCard(this)">
+      <div class="sc-top">
+        <div style="display:flex;align-items:center;gap:0.8rem">
+          <div class="sc-icon">🌍</div>
+          <div><div class="sc-name">Social Science</div><div class="sc-desc">History, Geography, Civics & Economics</div></div>
+        </div>
+        <div class="sc-toggle">+</div>
       </div>
-      <div class="s-desc">History, Geography, Civics & Economics — 20 Chapters</div>
+      <div class="sc-meta"><span class="sc-count">20 Chapters</span></div>
       <div class="chapters">
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">History — Rise of Nationalism in Europe</div><div class="ch-topics">French Revolution, Nation-states, Unification</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">History — Nationalism in India</div><div class="ch-topics">Non-Cooperation, Civil Disobedience, Quit India</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">History — Making of a Global World</div><div class="ch-topics">Silk Routes, Colonial Trade, Great Depression</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">History — Age of Industrialisation</div><div class="ch-topics">Proto-industrialisation, Factories, Labour</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">History — Print Culture & Modern World</div><div class="ch-topics">Printing Press, Newspapers, Books in India</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Geography — Resources & Development</div><div class="ch-topics">Types of Resources, Land Use, Soil Types</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Geography — Water Resources</div><div class="ch-topics">Dams, Rainwater Harvesting</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Geography — Agriculture</div><div class="ch-topics">Types of Farming, Crops, Green Revolution</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Geography — Minerals & Energy Resources</div><div class="ch-topics">Coal, Petroleum, Nuclear Energy</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Civics — Power Sharing</div><div class="ch-topics">Belgium, Sri Lanka, Majoritarianism</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Civics — Federalism</div><div class="ch-topics">Types, Indian Federalism, Decentralisation</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Economics — Development</div><div class="ch-topics">National Income, HDI, Sustainability</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Economics — Money & Credit</div><div class="ch-topics">Banks, SHGs, Formal vs Informal Credit</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Economics — Globalisation</div><div class="ch-topics">MNCs, WTO, Fair Globalisation</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">History — Rise of Nationalism in Europe</div><div class="ch-topics">French Revolution · Nation-states · Unification</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">History — Nationalism in India</div><div class="ch-topics">Non-Cooperation · Civil Disobedience · Gandhi</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">History — Making of a Global World</div><div class="ch-topics">Silk Routes · Colonial Trade · Great Depression</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">History — Age of Industrialisation</div><div class="ch-topics">Proto-industrialisation · Factories · Labour in India</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Geography — Resources & Development</div><div class="ch-topics">Types of Resources · Land Use · Soil Types</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Geography — Water Resources</div><div class="ch-topics">Dams · Rainwater Harvesting · Multipurpose Projects</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Geography — Agriculture</div><div class="ch-topics">Types of Farming · Crops · Green Revolution</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Geography — Minerals & Energy Resources</div><div class="ch-topics">Coal · Petroleum · Nuclear Energy</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Civics — Power Sharing</div><div class="ch-topics">Belgium · Sri Lanka · Majoritarianism</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Civics — Federalism</div><div class="ch-topics">Types · Indian Federalism · Decentralisation</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Economics — Development</div><div class="ch-topics">National Income · HDI · Sustainability</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Economics — Money & Credit</div><div class="ch-topics">Banks · SHGs · Formal vs Informal Credit</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Economics — Globalisation & Indian Economy</div><div class="ch-topics">MNCs · WTO · Fair Globalisation</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
       </div>
     </div>
 
     <!-- ENGLISH -->
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <div class="subject-top">
-        <div class="subject-icon-name"><div class="s-icon">📖</div><span class="s-name">English</span></div>
-        <span class="toggle">+</span>
+    <div class="subject-card" style="--card-color:#ec4899;--card-bg:rgba(236,72,153,0.1)" onclick="toggleCard(this)">
+      <div class="sc-top">
+        <div style="display:flex;align-items:center;gap:0.8rem">
+          <div class="sc-icon">📖</div>
+          <div><div class="sc-name">English</div><div class="sc-desc">First Flight, Footprints & Grammar</div></div>
+        </div>
+        <div class="sc-toggle">+</div>
       </div>
-      <div class="s-desc">First Flight, Footprints & Grammar — 12 Chapters</div>
+      <div class="sc-meta"><span class="sc-count">12 Chapters</span></div>
       <div class="chapters">
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">A Letter to God</div><div class="ch-topics">Summary, Character Sketch, Important Q&A</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Nelson Mandela — Long Walk to Freedom</div><div class="ch-topics">Summary, Values, Important Q&A</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Two Stories about Flying</div><div class="ch-topics">His First Flight & Black Aeroplane</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">From the Diary of Anne Frank</div><div class="ch-topics">Summary, Diary Writing Tips</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Glimpses of India</div><div class="ch-topics">A Baker from Goa, Coorg, Tea from Assam</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">The Sermon at Benares</div><div class="ch-topics">Summary, Message, Questions</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">The Proposal — Anton Chekov</div><div class="ch-topics">Play Summary, Characters, Questions</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Grammar — Tenses, Voice & Speech</div><div class="ch-topics">Active-Passive, Reported Speech</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Letter & Essay Writing</div><div class="ch-topics">Formal Letter, Application, Essay Tips</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">A Letter to God</div><div class="ch-topics">Summary · Character Sketch · Important Q&A</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Nelson Mandela — Long Walk to Freedom</div><div class="ch-topics">Summary · Values · Important Q&A</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Two Stories about Flying</div><div class="ch-topics">His First Flight & Black Aeroplane</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">From the Diary of Anne Frank</div><div class="ch-topics">Summary · Diary Writing Tips</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Glimpses of India</div><div class="ch-topics">A Baker · Coorg · Tea from Assam</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">The Sermon at Benares</div><div class="ch-topics">Summary · Message · Questions</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">The Proposal — Anton Chekov</div><div class="ch-topics">Play Summary · Characters · Questions</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Grammar — Tenses, Voice & Speech</div><div class="ch-topics">Active-Passive · Reported Speech · Clauses</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Letter & Essay Writing</div><div class="ch-topics">Formal Letter · Application · Essay Tips</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
       </div>
     </div>
 
     <!-- HINDI -->
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <div class="subject-top">
-        <div class="subject-icon-name"><div class="s-icon">✍️</div><span class="s-name">Hindi</span></div>
-        <span class="toggle">+</span>
+    <div class="subject-card" style="--card-color:#eab308;--card-bg:rgba(234,179,8,0.1)" onclick="toggleCard(this)">
+      <div class="sc-top">
+        <div style="display:flex;align-items:center;gap:0.8rem">
+          <div class="sc-icon">✍️</div>
+          <div><div class="sc-name">Hindi</div><div class="sc-desc">Kshitij, Kritika, Sparsh & Vyakaran</div></div>
+        </div>
+        <div class="sc-toggle">+</div>
       </div>
-      <div class="s-desc">Kshitij, Kritika, Sparsh & Vyakaran — 17 Chapters</div>
+      <div class="sc-meta"><span class="sc-count">17 Chapters</span></div>
       <div class="chapters">
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Kshitij — Surdas ke Pad</div><div class="ch-topics">Bhavarth, Shabdarth, Prashnottar</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Kshitij — Ram Lakshman Parshuram Samvad</div><div class="ch-topics">Bhavarth, Tulsidas, Questions</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Kshitij — Neta Ji ka Chasma</div><div class="ch-topics">Saransh, Charitra, Questions</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Kshitij — Balgobin Bhagat</div><div class="ch-topics">Saransh, Charitra Chitran, Questions</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Kshitij — Lakhnawi Andaaz</div><div class="ch-topics">Saransh, Vyangya, Questions</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Vyakaran — Ras</div><div class="ch-topics">Shringar, Veer, Karuna, Hasya — Udaharan</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Vyakaran — Chhand & Alankaar</div><div class="ch-topics">Doha, Chaupai, Upama, Rupak</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Patra Lekhan & Nibandh</div><div class="ch-topics">Formal Letter, Essay Writing</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Kshitij — Surdas ke Pad</div><div class="ch-topics">Bhavarth · Shabdarth · Prashnottar</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Kshitij — Ram Lakshman Parshuram Samvad</div><div class="ch-topics">Bhavarth · Tulsidas · Questions</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Kshitij — Neta Ji ka Chasma</div><div class="ch-topics">Saransh · Charitra · Questions</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Kshitij — Balgobin Bhagat</div><div class="ch-topics">Saransh · Charitra Chitran · Questions</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Kshitij — Lakhnawi Andaaz</div><div class="ch-topics">Saransh · Vyangya · Questions</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Vyakaran — Ras</div><div class="ch-topics">Shringar · Veer · Karuna · Hasya — Examples</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Vyakaran — Chhand & Alankaar</div><div class="ch-topics">Doha · Chaupai · Upama · Rupak · Anupraas</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Patra Lekhan & Nibandh</div><div class="ch-topics">Formal Letter · Essay Writing Tips</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
       </div>
     </div>
 
     <!-- SANSKRIT -->
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <div class="subject-top">
-        <div class="subject-icon-name"><div class="s-icon">🕉️</div><span class="s-name">Sanskrit</span></div>
-        <span class="toggle">+</span>
+    <div class="subject-card" style="--card-color:#a855f7;--card-bg:rgba(168,85,247,0.1)" onclick="toggleCard(this)">
+      <div class="sc-top">
+        <div style="display:flex;align-items:center;gap:0.8rem">
+          <div class="sc-icon">🕉️</div>
+          <div><div class="sc-name">Sanskrit</div><div class="sc-desc">Shemushi & Vyakarana Veethi</div></div>
+        </div>
+        <div class="sc-toggle">+</div>
       </div>
-      <div class="s-desc">Shemushi & Vyakarana Veethi — 9 Chapters</div>
+      <div class="sc-meta"><span class="sc-count">9 Chapters</span></div>
       <div class="chapters">
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Shemushi — Shuchiparyavaram</div><div class="ch-topics">Anuvad, Shabdarth, Prashnottar</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Shemushi — Budhirbalam</div><div class="ch-topics">Anuvad, Shabdarth, Questions</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Shemushi — Vyayamah Sarvada Pathyah</div><div class="ch-topics">Anuvad, Sandesh, Questions</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Shemushi — Striyah Shakti</div><div class="ch-topics">Anuvad, Shabdarth, Questions</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Vyakarana — Sandhi</div><div class="ch-topics">Swar, Vyanjan, Visarg Sandhi</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Vyakarana — Shabd Roop & Dhatu Roop</div><div class="ch-topics">Ram, Phala, Lata — all forms</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
-        <div class="ch-row"><div class="ch-info"><div class="ch-name">Vyakarana — Samas & Karak</div><div class="ch-topics">Types of Samas, Vibhakti Chart</div></div><div class="ch-btns"><span class="cbtn cbtn-dim coming-soon">Notes Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Shemushi — Shuchiparyavaram</div><div class="ch-topics">Anuvad · Shabdarth · Prashnottar</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Shemushi — Budhirbalam</div><div class="ch-topics">Anuvad · Shabdarth · Questions</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Shemushi — Vyayamah Sarvada Pathyah</div><div class="ch-topics">Anuvad · Sandesh · Questions</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Shemushi — Striyah Shakti</div><div class="ch-topics">Anuvad · Shabdarth · Questions</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Vyakarana — Sandhi</div><div class="ch-topics">Swar · Vyanjan · Visarg Sandhi</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Vyakarana — Shabd Roop & Dhatu Roop</div><div class="ch-topics">Ram · Phala · Lata — all forms</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
+        <div class="ch-item"><div class="ch-left"><div class="ch-name">Vyakarana — Samas & Karak</div><div class="ch-topics">Types of Samas · Vibhakti Chart</div></div><div class="ch-right"><span class="ch-btn ch-btn-dim">Coming Soon</span></div></div>
       </div>
     </div>
 
@@ -331,91 +803,88 @@ footer{padding:2.5rem 5%;border-top:1px solid var(--border);}
 </section>
 
 <!-- RESOURCES -->
-<section id="resources" class="fade">
-  <div class="sec-header">
-    <h2>Resources</h2>
-    <span>Notes, PDFs & Papers</span>
-  </div>
-  <div class="res-grid">
-    <div class="res-card"><div class="res-icon">📗</div><h3>NCERT Books</h3><p>Official NCERT PDFs for all subjects</p><div class="res-status soon">⏳ Links being added soon</div></div>
-    <div class="res-card"><div class="res-icon">✅</div><h3>NCERT Solutions</h3><p>Step-by-step solved exercises</p><div class="res-status soon">⏳ Coming soon</div></div>
-    <div class="res-card"><div class="res-icon">🔢</div><h3>Formula Sheets</h3><p>Maths & Science — all important formulas</p><div class="res-status soon">⏳ Coming soon</div></div>
-    <div class="res-card"><div class="res-icon">📊</div><h3>Sample Papers</h3><p>Previous year & practice board papers</p><div class="res-status soon">⏳ Coming soon</div></div>
+<section class="section reveal" id="resources" style="background:rgba(255,255,255,0.01);padding-top:2rem">
+  <div class="section-tag">📥 Resources</div>
+  <h2 class="section-title">Free Study Material</h2>
+  <p class="section-sub">NCERT books, formula sheets aur sample papers — sab ek jagah milega!</p>
+  <div class="features-grid">
+    <div class="feature-card"><div class="feat-icon">📗</div><div class="feat-title">NCERT Books PDF</div><div class="feat-desc">Sare subjects ke official NCERT books — download karo free mein.<br><br><span style="color:var(--primary-light);font-size:0.75rem;font-weight:600">⏳ Links add ho rahe hain...</span></div></div>
+    <div class="feature-card"><div class="feat-icon">✅</div><div class="feat-title">NCERT Solutions</div><div class="feat-desc">Har exercise ka step-by-step solved answer with proper explanation.<br><br><span style="color:var(--primary-light);font-size:0.75rem;font-weight:600">⏳ Coming very soon!</span></div></div>
+    <div class="feature-card"><div class="feat-icon">🔢</div><div class="feat-title">Formula Sheets</div><div class="feat-desc">Maths & Science ke saare important formulas ek page pe.<br><br><span style="color:var(--primary-light);font-size:0.75rem;font-weight:600">⏳ Being prepared...</span></div></div>
+    <div class="feature-card"><div class="feat-icon">📊</div><div class="feat-title">Sample Papers</div><div class="feat-desc">Previous year aur practice board papers with complete solutions.<br><br><span style="color:var(--primary-light);font-size:0.75rem;font-weight:600">⏳ Coming soon!</span></div></div>
   </div>
 </section>
 
 <!-- IMPORTANT QUESTIONS -->
-<section id="questions" class="fade">
-  <div class="sec-header">
-    <h2>Important Questions</h2>
-    <span>Board exam ke liye most likely</span>
-  </div>
-  <div class="iq-list">
-    <div class="iq-item"><div class="iq-num">01</div><div class="iq-body"><div class="iq-text">Prove that √2 is irrational.</div><div class="iq-subject">Maths — Real Numbers</div></div><span class="iq-tag tag-high">High</span></div>
-    <div class="iq-item"><div class="iq-num">02</div><div class="iq-body"><div class="iq-text">What is Balancing of Chemical Equations? Give two examples with types of reactions.</div><div class="iq-subject">Science — Chemistry</div></div><span class="iq-tag tag-high">High</span></div>
-    <div class="iq-item"><div class="iq-num">03</div><div class="iq-body"><div class="iq-text">Explain the Non-Cooperation Movement — causes, events and impact.</div><div class="iq-subject">SST — History</div></div><span class="iq-tag tag-high">High</span></div>
-    <div class="iq-item"><div class="iq-num">04</div><div class="iq-body"><div class="iq-text">Write a formal letter to the editor about increasing water pollution in your city.</div><div class="iq-subject">English — Writing</div></div><span class="iq-tag tag-med">Medium</span></div>
-    <div class="iq-item"><div class="iq-num">05</div><div class="iq-body"><div class="iq-text">Prove: sin²θ + cos²θ = 1. Also prove 1 + tan²θ = sec²θ.</div><div class="iq-subject">Maths — Trigonometry</div></div><span class="iq-tag tag-high">High</span></div>
-    <div class="iq-item"><div class="iq-num">06</div><div class="iq-body"><div class="iq-text">State Ohm's Law. Draw a circuit diagram and derive the formula for parallel resistance.</div><div class="iq-subject">Science — Physics</div></div><span class="iq-tag tag-high">High</span></div>
-    <div class="iq-item"><div class="iq-num">07</div><div class="iq-body"><div class="iq-text">What is Federalism? How is it practised in India? Explain with examples.</div><div class="iq-subject">SST — Civics</div></div><span class="iq-tag tag-high">High</span></div>
-    <div class="iq-item"><div class="iq-num">08</div><div class="iq-body"><div class="iq-text">Ram Lakshman Parshuram Samvad ka saransh likhiye aur Lakshman ke swabhav ka varnan karo.</div><div class="iq-subject">Hindi — Kshitij</div></div><span class="iq-tag tag-high">High</span></div>
+<section class="section reveal" id="questions" style="padding-top:2rem">
+  <div class="section-tag">❓ Must Read</div>
+  <h2 class="section-title">Important Questions</h2>
+  <p class="section-sub">Board exam mein ye questions most likely aate hain — zaroor padho!</p>
+  <div class="iq-grid">
+    <div class="iq-card"><div class="iq-num">01</div><div class="iq-body"><div class="iq-q">Prove that √2 is irrational. Also prove √3 is irrational.</div><div class="iq-meta"><span class="iq-subj">Maths — Ch 1: Real Numbers</span><span class="iq-tag tag-h">🔥 High</span></div></div></div>
+    <div class="iq-card"><div class="iq-num">02</div><div class="iq-body"><div class="iq-q">What is Balancing of Chemical Equations? Give examples of all types of chemical reactions.</div><div class="iq-meta"><span class="iq-subj">Science — Ch 1: Chemical Reactions</span><span class="iq-tag tag-h">🔥 High</span></div></div></div>
+    <div class="iq-card"><div class="iq-num">03</div><div class="iq-body"><div class="iq-q">Explain the Non-Cooperation Movement — causes, major events and its impact on India.</div><div class="iq-meta"><span class="iq-subj">SST — History: Nationalism in India</span><span class="iq-tag tag-h">🔥 High</span></div></div></div>
+    <div class="iq-card"><div class="iq-num">04</div><div class="iq-body"><div class="iq-q">Write a formal letter to the editor of a newspaper about increasing water pollution.</div><div class="iq-meta"><span class="iq-subj">English — Writing Skills</span><span class="iq-tag tag-m">✅ Medium</span></div></div></div>
+    <div class="iq-card"><div class="iq-num">05</div><div class="iq-body"><div class="iq-q">Prove: sin²θ + cos²θ = 1. Also prove: 1 + tan²θ = sec²θ and 1 + cot²θ = cosec²θ.</div><div class="iq-meta"><span class="iq-subj">Maths — Ch 8: Trigonometry</span><span class="iq-tag tag-h">🔥 High</span></div></div></div>
+    <div class="iq-card"><div class="iq-num">06</div><div class="iq-body"><div class="iq-q">State Ohm's Law. Derive the formula for equivalent resistance in series and parallel circuits.</div><div class="iq-meta"><span class="iq-subj">Science — Ch 12: Electricity</span><span class="iq-tag tag-h">🔥 High</span></div></div></div>
+    <div class="iq-card"><div class="iq-num">07</div><div class="iq-body"><div class="iq-q">What is Federalism? How is it practised in India? Explain with examples.</div><div class="iq-meta"><span class="iq-subj">SST — Civics: Federalism</span><span class="iq-tag tag-h">🔥 High</span></div></div></div>
+    <div class="iq-card"><div class="iq-num">08</div><div class="iq-body"><div class="iq-q">Ram Lakshman Parshuram Samvad ka saransh likhiye. Lakshman ke swabhav ka varnan karo.</div><div class="iq-meta"><span class="iq-subj">Hindi — Kshitij</span><span class="iq-tag tag-h">🔥 High</span></div></div></div>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="fade">
-  <div class="sec-header">
-    <h2>About Us</h2>
-    <span>Who we are</span>
-  </div>
+<section class="section reveal" id="about" style="padding-top:2rem">
+  <div class="section-tag">👋 About Us</div>
+  <h2 class="section-title">Kaun Hain Hum?</h2>
+  <p class="section-sub">Azamgarh ke students ne, Azamgarh ke students ke liye banaya!</p>
   <div class="about-grid">
     <div class="about-card">
-      <h3>Our Story</h3>
-      <div class="about-item"><span class="ai">👋</span><div><p>Ye platform Seemarani ne banaya hai</p><span>Kanjahit Bazar, Azamgarh, UP</span></div></div>
-      <div class="about-item"><span class="ai">🎯</span><div><p>Hamare area ke Class 10th students ke liye free notes aur resources provide karna</p></div></div>
-      <div class="about-item"><span class="ai">📚</span><div><p>CBSE syllabus ke sabhi 6 subjects cover kiye gaye hain</p></div></div>
-      <div class="about-item"><span class="ai">💡</span><div><p>Notes, solutions aur sample papers — sab bilkul free</p></div></div>
+      <h3>🏠 Our Story</h3>
+      <div class="about-item"><span class="ai-icon">👩‍💻</span><div><h4>Seemarani — Founder</h4><p>Kanjahit Bazar, Nahar ke Pass, Azamgarh, UP</p></div></div>
+      <div class="about-item"><span class="ai-icon">🎯</span><div><h4>Mission</h4><p>Class 10th students ko free, quality study material provide karna — bina kisi fee ke!</p></div></div>
+      <div class="about-item"><span class="ai-icon">💡</span><div><h4>Vision</h4><p>Har student — chahe gaon mein ho ya shehar mein — achhi padhai kar sake.</p></div></div>
+      <div class="about-item"><span class="ai-icon">❤️</span><div><h4>Commitment</h4><p>Ye platform hamesha FREE rahega. Education sabka haq hai!</p></div></div>
     </div>
     <div class="about-card">
-      <h3>Website Status</h3>
-      <div class="about-item"><span class="ai">✅</span><div><p>Website live hai!</p><span>seemarani1652-max.github.io</span></div></div>
-      <div class="about-item"><span class="ai">⏳</span><div><p>Notes aur PDFs add ho rahe hain</p><span>Jald hi available honge</span></div></div>
-      <div class="about-item"><span class="ai">📞</span><div><p>Koi bhi question — WhatsApp karo</p><span>+91 97211 69466</span></div></div>
-      <div class="about-item"><span class="ai">🏫</span><div><p>Class 10th CBSE students ke liye</p><span>Azamgarh & surrounding areas</span></div></div>
+      <h3>📊 Website Stats</h3>
+      <div class="about-item"><span class="ai-icon">✅</span><div><h4>Website Live!</h4><p>seemarani1652-max.github.io — fully working!</p></div></div>
+      <div class="about-item"><span class="ai-icon">📚</span><div><h4>89+ Chapters Listed</h4><p>6 subjects ke sare chapters organized hain.</p></div></div>
+      <div class="about-item"><span class="ai-icon">⏳</span><div><h4>Notes Coming Soon</h4><p>Notes aur PDFs jaldi add kiye jaayenge!</p></div></div>
+      <div class="about-item"><span class="ai-icon">💬</span><div><h4>Doubt Support Available</h4><p>WhatsApp pe poocho — same day reply milega!</p></div></div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="fade">
-  <div class="sec-header">
-    <h2>Contact</h2>
-    <span>Reach us anytime</span>
-  </div>
+<section class="section reveal" id="contact" style="padding-top:2rem">
+  <div class="section-tag">📞 Contact</div>
+  <h2 class="section-title">Reach Us Anytime</h2>
+  <p class="section-sub">Koi bhi sawaal ho — WhatsApp karo ya message bhejo!</p>
   <div class="contact-grid">
     <div class="contact-links">
       <a href="https://wa.me/919721169466" class="contact-link">
-        <span class="cl-icon">💬</span>
-        <div class="cl-text"><h4>WhatsApp</h4><p>+91 97211 69466 — Message anytime</p></div>
+        <div class="cl-icon-wrap">💬</div>
+        <div><div class="cl-title">WhatsApp</div><div class="cl-sub">+91 97211 69466 — Message anytime!</div></div>
       </a>
       <a href="mailto:seemarani1652@gmail.com" class="contact-link">
-        <span class="cl-icon">✉️</span>
-        <div class="cl-text"><h4>Email</h4><p>seemarani1652@gmail.com</p></div>
+        <div class="cl-icon-wrap">✉️</div>
+        <div><div class="cl-title">Email</div><div class="cl-sub">seemarani1652@gmail.com</div></div>
       </a>
       <div class="contact-link">
-        <span class="cl-icon">📍</span>
-        <div class="cl-text"><h4>Location</h4><p>Kanjahit Bazar, Nahar ke Pass, Azamgarh, UP</p></div>
+        <div class="cl-icon-wrap">📍</div>
+        <div><div class="cl-title">Location</div><div class="cl-sub">Kanjahit Bazar, Nahar ke Pass, Azamgarh, UP</div></div>
       </div>
       <div class="contact-link">
-        <span class="cl-icon">🕐</span>
-        <div class="cl-text"><h4>Response Time</h4><p>WhatsApp pe same day reply milega</p></div>
+        <div class="cl-icon-wrap">🕐</div>
+        <div><div class="cl-title">Response Time</div><div class="cl-sub">Same day reply on WhatsApp guaranteed!</div></div>
       </div>
     </div>
     <div class="contact-form">
-      <input type="text" placeholder="Aapka Naam">
-      <input type="text" placeholder="Subject / Topic jisme help chahiye">
-      <textarea rows="4" placeholder="Apna sawaal ya message likhiye..."></textarea>
-      <button onclick="sendMsg()">Message Bhejo</button>
+      <h3>Send a Message 📩</h3>
+      <div class="form-field"><label>Your Name</label><input type="text" id="fname" placeholder="Enter your name"></div>
+      <div class="form-field"><label>Subject / Topic</label><input type="text" placeholder="e.g. Maths Doubt, Science Notes"></div>
+      <div class="form-field"><label>Message</label><textarea rows="4" placeholder="Type your question or message..."></textarea></div>
+      <button class="form-submit" onclick="sendForm()">Send Message 🚀</button>
     </div>
   </div>
 </section>
@@ -423,102 +892,121 @@ footer{padding:2.5rem 5%;border-top:1px solid var(--border);}
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
-    <div>
-      <div class="footer-logo">Aditya & Ravi Bro</div>
-      <div class="footer-tagline">Class 10th CBSE — Free Study Platform — Azamgarh, UP</div>
+    <div class="footer-brand">
+      <div class="f-logo">Aditya & Ravi Bro ✦</div>
+      <p>Class 10th CBSE ka sabse trusted free study platform. Azamgarh, UP se — poore India ke liye!</p>
     </div>
-    <div class="footer-links">
-      <a href="#subjects">Subjects</a>
-      <a href="#resources">Resources</a>
-      <a href="#questions">Questions</a>
-      <a href="#contact">Contact</a>
+    <div class="footer-col">
+      <h4>Subjects</h4>
+      <a href="#subjects">Mathematics</a>
+      <a href="#subjects">Science</a>
+      <a href="#subjects">Social Science</a>
+      <a href="#subjects">English</a>
+      <a href="#subjects">Hindi</a>
+      <a href="#subjects">Sanskrit</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="https://wa.me/919721169466">💬 WhatsApp</a>
+      <a href="mailto:seemarani1652@gmail.com">✉️ Email</a>
+      <a href="#about">📍 Azamgarh, UP</a>
+      <a href="#questions">❓ Important Q&A</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>Made with ❤️ by Seemarani — Kanjahit Bazar, Azamgarh</p>
-    <p>Free for all Class 10th CBSE Students</p>
+    <p>© 2026 Aditya & Ravi Bro — Made with ❤️ by Seemarani, Kanjahit Bazar, Azamgarh</p>
+    <p>Free for all Class 10th CBSE Students 🇮🇳</p>
   </div>
 </footer>
 
 <script>
-// NAV TOGGLE
-function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+// NAV
+function toggleNav(){document.getElementById('navMenu').classList.toggle('open');}
+function closeNav(){document.getElementById('navMenu').classList.remove('open');}
 
 // SUBJECT TOGGLE
-function toggleSubject(card){
+function toggleCard(card){
   const isOpen=card.classList.contains('open');
   document.querySelectorAll('.subject-card').forEach(c=>c.classList.remove('open'));
-  if(!isOpen)card.classList.add('open');
+  if(!isOpen){card.classList.add('open');setTimeout(()=>{card.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}
 }
 
-// SEARCH - WORKING!
-const allChapters=[
-  {name:"Real Numbers",subject:"Maths",topics:"Euclid HCF LCM Irrational"},
-  {name:"Polynomials",subject:"Maths",topics:"Zeroes Coefficients"},
-  {name:"Linear Equations",subject:"Maths",topics:"Graphical Substitution Elimination"},
-  {name:"Quadratic Equations",subject:"Maths",topics:"Factorisation Discriminant"},
-  {name:"Arithmetic Progressions",subject:"Maths",topics:"nth Term Sum"},
-  {name:"Triangles",subject:"Maths",topics:"Similarity BPT Pythagoras"},
-  {name:"Coordinate Geometry",subject:"Maths",topics:"Distance Section Formula"},
-  {name:"Trigonometry",subject:"Maths",topics:"Ratios Identities sin cos tan"},
-  {name:"Circles",subject:"Maths",topics:"Tangents Secants"},
-  {name:"Statistics",subject:"Maths",topics:"Mean Median Mode"},
-  {name:"Probability",subject:"Maths",topics:"Classical Events"},
-  {name:"Chemical Reactions",subject:"Science",topics:"Balancing Oxidation Reduction"},
-  {name:"Acids Bases Salts",subject:"Science",topics:"pH Indicators"},
-  {name:"Metals Non-Metals",subject:"Science",topics:"Reactivity Series"},
-  {name:"Life Processes",subject:"Science",topics:"Nutrition Respiration Photosynthesis"},
-  {name:"Electricity",subject:"Science",topics:"Ohm Law Resistance Circuit"},
-  {name:"Light Reflection Refraction",subject:"Science",topics:"Mirror Lens Formula"},
-  {name:"Magnetic Effects",subject:"Science",topics:"Electromagnet Motor Generator"},
-  {name:"Nationalism in India",subject:"SST",topics:"Non-Cooperation Civil Disobedience Gandhi"},
-  {name:"Power Sharing",subject:"SST",topics:"Belgium Sri Lanka Federalism"},
-  {name:"Development",subject:"SST",topics:"HDI National Income"},
-  {name:"Water Resources",subject:"SST",topics:"Dams Rainwater Harvesting"},
-  {name:"Nelson Mandela",subject:"English",topics:"Summary Freedom Long Walk"},
-  {name:"Letter Writing",subject:"English",topics:"Formal Letter Application"},
-  {name:"Grammar Tenses",subject:"English",topics:"Active Passive Reported Speech"},
-  {name:"Surdas ke Pad",subject:"Hindi",topics:"Bhavarth Kavita"},
-  {name:"Ram Lakshman Parshuram",subject:"Hindi",topics:"Samvad Tulsidas"},
-  {name:"Ras Chhand Alankaar",subject:"Hindi",topics:"Vyakaran Shringar Upama"},
-  {name:"Shemushi Chapters",subject:"Sanskrit",topics:"Anuvad Translation Sandhi"},
-  {name:"Shabd Roop Dhatu Roop",subject:"Sanskrit",topics:"Vibhakti Grammar"},
+// SEARCH
+const chapters=[
+  {n:"Real Numbers",s:"Maths",t:"euclid hcf lcm irrational numbers"},
+  {n:"Polynomials",s:"Maths",t:"zeroes coefficients division"},
+  {n:"Linear Equations in Two Variables",s:"Maths",t:"graphical substitution elimination"},
+  {n:"Quadratic Equations",s:"Maths",t:"factorisation discriminant"},
+  {n:"Arithmetic Progressions",s:"Maths",t:"nth term sum ap"},
+  {n:"Triangles",s:"Maths",t:"similarity bpt pythagoras"},
+  {n:"Coordinate Geometry",s:"Maths",t:"distance section formula area"},
+  {n:"Introduction to Trigonometry",s:"Maths",t:"sin cos tan ratios identities"},
+  {n:"Applications of Trigonometry",s:"Maths",t:"heights distances elevation"},
+  {n:"Circles",s:"Maths",t:"tangents secants theorems"},
+  {n:"Surface Areas & Volumes",s:"Maths",t:"frustum solids combination"},
+  {n:"Statistics",s:"Maths",t:"mean median mode grouped data"},
+  {n:"Probability",s:"Maths",t:"classical events outcomes"},
+  {n:"Chemical Reactions & Equations",s:"Science",t:"balancing oxidation reduction types"},
+  {n:"Acids Bases & Salts",s:"Science",t:"ph scale indicators"},
+  {n:"Metals & Non-Metals",s:"Science",t:"reactivity series ionic bonds"},
+  {n:"Carbon & its Compounds",s:"Science",t:"covalent bonds homologous soaps"},
+  {n:"Life Processes",s:"Science",t:"nutrition respiration photosynthesis transportation"},
+  {n:"Control & Coordination",s:"Science",t:"nervous system hormones reflex"},
+  {n:"Heredity & Evolution",s:"Science",t:"mendel laws natural selection"},
+  {n:"Light Reflection & Refraction",s:"Science",t:"mirror lens formula optics"},
+  {n:"Electricity",s:"Science",t:"ohm law resistance circuit parallel series"},
+  {n:"Magnetic Effects of Current",s:"Science",t:"electromagnet motor generator"},
+  {n:"Sources of Energy",s:"Science",t:"solar wind nuclear conventional"},
+  {n:"Nationalism in India",s:"SST",t:"non cooperation civil disobedience gandhi"},
+  {n:"Power Sharing",s:"SST",t:"belgium sri lanka majoritarianism"},
+  {n:"Federalism",s:"SST",t:"decentralisation indian federalism"},
+  {n:"Development",s:"SST",t:"hdi national income sustainability"},
+  {n:"Money & Credit",s:"SST",t:"banks shgs formal informal credit"},
+  {n:"Agriculture",s:"SST",t:"farming crops green revolution"},
+  {n:"Nelson Mandela",s:"English",t:"summary freedom long walk"},
+  {n:"A Letter to God",s:"English",t:"summary character lencho"},
+  {n:"Grammar Tenses Voice Speech",s:"English",t:"active passive reported clauses"},
+  {n:"Letter Writing",s:"English",t:"formal letter application essay"},
+  {n:"Surdas ke Pad",s:"Hindi",t:"bhavarth kavita kshitij"},
+  {n:"Ram Lakshman Parshuram Samvad",s:"Hindi",t:"tulsidas lakshman samvad"},
+  {n:"Ras Chhand Alankaar",s:"Hindi",t:"vyakaran shringar upama rupak"},
+  {n:"Shemushi Chapters",s:"Sanskrit",t:"anuvad translation shabdarth"},
+  {n:"Sandhi",s:"Sanskrit",t:"swar vyanjan visarg sandhi"},
+  {n:"Shabd Roop Dhatu Roop",s:"Sanskrit",t:"vibhakti lakar ram phala"},
 ];
 
 function doSearch(){
   const q=document.getElementById('searchInput').value.toLowerCase().trim();
   const box=document.getElementById('searchResults');
   if(!q){box.style.display='none';return;}
-  const results=allChapters.filter(c=>
-    c.name.toLowerCase().includes(q)||
-    c.subject.toLowerCase().includes(q)||
-    c.topics.toLowerCase().includes(q)
-  );
-  if(results.length===0){
-    box.style.display='block';
-    box.innerHTML='<div class="search-result-item" style="color:var(--muted)">No results found for "'+q+'"</div>';
-    return;
-  }
+  const res=chapters.filter(c=>c.n.toLowerCase().includes(q)||c.s.toLowerCase().includes(q)||c.t.toLowerCase().includes(q));
   box.style.display='block';
-  box.innerHTML=results.map(r=>
-    `<div class="search-result-item" onclick="document.getElementById('subjects').scrollIntoView({behavior:'smooth'})">
-      <strong>${r.name}</strong> &nbsp;·&nbsp; <span style="color:var(--muted)">${r.subject}</span>
-    </div>`
-  ).join('');
+  if(!res.length){box.innerHTML='<div class="sr-item"><div style="color:var(--muted);font-size:0.83rem">No results for "'+q+'" — try different keywords</div></div>';return;}
+  box.innerHTML=res.slice(0,6).map(r=>`
+    <div class="sr-item" onclick="document.getElementById('subjects').scrollIntoView({behavior:'smooth'})">
+      <div class="sr-icon">${r.s==='Maths'?'📐':r.s==='Science'?'🔬':r.s==='SST'?'🌍':r.s==='English'?'📖':r.s==='Hindi'?'✍️':'🕉️'}</div>
+      <div><div class="sr-name">${r.n}</div><div class="sr-sub">${r.s}</div></div>
+    </div>`).join('');
 }
 
-// CONTACT FORM
-function sendMsg(){
-  const name=document.querySelector('.contact-form input').value;
-  if(!name){alert('Please enter your name!');return;}
-  alert('Message received! Hum jald WhatsApp pe reply karenge. +91 97211 69466');
+document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))document.getElementById('searchResults').style.display='none';});
+
+// FORM
+function sendForm(){
+  const n=document.getElementById('fname').value.trim();
+  if(!n){alert('Please enter your name!');return;}
+  window.open('https://wa.me/919721169466?text=Hello! I am '+encodeURIComponent(n)+' from Aditya & Ravi Bro website. I have a question.','_blank');
 }
 
-// FADE IN
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show');});
-},{threshold:0.08});
-document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// NAV SCROLL
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('navbar');
+  nav.style.boxShadow=window.scrollY>20?'0 4px 30px rgba(0,0,0,0.5)':'none';
+});
 </script>
 </body>
 </html>
